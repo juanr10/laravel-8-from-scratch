@@ -9,6 +9,10 @@ class Post extends Model
 {
     use HasFactory;
 
+    // protected $guarded = [
+    //     'id'
+    // ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -16,7 +20,13 @@ class Post extends Model
     */
     protected $fillable = [
         'title',
+        'slug',
         'excerpt',
         'body',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }
