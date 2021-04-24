@@ -16,21 +16,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $posts = Post::all();
+    $posts = Post::with('category', 'user')->get();
 
     return view('posts.posts', compact('posts'));
-});
+})->name('posts');
 
 Route::get('posts/{post:slug}', function (Post $post) {
 
     return view('posts.post', [
         'post' => $post
     ]);
-});
+})->name('post');
 
 Route::get('categories/{category:slug}', function (Category $category) {
 
     return view('posts.posts', [
         'posts' => $category->posts
     ]);
-});
+})->name('categories');
